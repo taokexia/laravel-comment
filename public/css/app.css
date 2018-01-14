@@ -5758,4 +5758,8 @@ button.close {
         overflow: hidden;
         text-overflow: ellipsis; }
 
+.replyList {
+  max-height: 300px;
+  overflow-y: auto; }
+
 /*# sourceMappingURL=app.css.map */

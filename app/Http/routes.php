@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+	//get all reply
+	$comments = App\Comment::orderBy('created_at', 'desc')->paginate(20);
+    return view('home', compact('comments'));
 });
 
 //login

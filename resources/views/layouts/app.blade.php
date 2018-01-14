@@ -78,5 +78,48 @@
     
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // AJAX csrf-token
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $('a#replyButton').click(function(){
+                
+                var comment_id = $(this).attr('data-comment-id');
+
+                
+                $('#replyForm' + comment_id).show();
+            });
+            
+            $('a#replyAJAX').click(function(){
+                
+                var comment_id = $(this).attr('data-comment-id');
+
+                
+                var form_data = $('#replyForm' + comment_id).serialize();
+
+                
+                $.ajax({
+                    url: "{{ route('replys.store') }}",
+                    type: "post",
+                    data: form_data,
+                    success: function(res){
+                        console.log(res);
+                    },
+                    error: function(err){
+                        console.log(err.responseText);
+                    }
+                });
+
+                
+                location.reload();
+            });
+
+        });
+    </script>
 </body>
 </html>
